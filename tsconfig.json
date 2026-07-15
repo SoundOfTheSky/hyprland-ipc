@@ -1,0 +1,6 @@
+{
+  "extends": "@softsky/configs/tsconfig-emit.json",
+  "compilerOptions": {
+    "types": ["@types/node"]
+  }
+}
