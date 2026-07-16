@@ -11,8 +11,9 @@ import {
   HyprlandMonitorData,
   HyprlandWorkspaceData,
   HyprlandWindowData,
+  Direction,
 } from './types'
-import { changeHyprlandObjectsToIds, toLua } from './utils'
+import { toLua } from './utils'
 import { HyprlandWindow } from './window'
 import { HyprlandWorkspace } from './workspace'
 
@@ -67,13 +68,14 @@ export class Hyprland<
 
   /** Evaluates raw Lua code through Hyprland's IPC interface. */
   public async eval(luaCode: string): Promise<string> {
+    console.log('eval', luaCode)
     return this.ipc.send(`/eval ${luaCode}`)
   }
 
   /** Run hyprland dispatcher from hl.dps */
-  public dispatch(name: string, data: Record<string, any>): Promise<string> {
+  public dispatch(name: string, data: unknown): Promise<string> {
     return this.ipc.send(
-      `/dispatch hl.dsp${name ? '.' + name : ''}(${toLua(changeHyprlandObjectsToIds(data))}`,
+      `/dispatch hl.dsp${name ? '.' + name : ''}(${toLua(data)})`,
     )
   }
 
@@ -195,5 +197,18 @@ export class Hyprland<
       `hl.bind("${bind.join(' + ')}", hl.dsp.exec_cmd("hyprland-ipc-js ${id}"))`,
     )
     return this.ipc.on(id, callback)
+  }
+
+  /** Move focus */
+  public focus(
+    data:
+      | { direction: Direction }
+      | { monitor: HyprlandMonitor | string }
+      | { workspace: HyprlandWorkspace | string; on_current_monitor?: boolean }
+      | { window: HyprlandWindow | string }
+      | { urgent_or_last: boolean }
+      | { last: boolean },
+  ) {
+    return this.dispatch('focus', data)
   }
 }

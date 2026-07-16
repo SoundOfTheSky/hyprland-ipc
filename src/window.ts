@@ -3,7 +3,6 @@ import { Direction } from 'node:readline'
 import { Hyprland } from './hyprland'
 import { HyprlandMonitor } from './monitor'
 import { HyprlandWindowData } from './types'
-import { changeHyprlandObjectsToIds } from './utils'
 import { HyprlandWorkspace } from './workspace'
 
 /** Wrapper around a Hyprland window object. */
@@ -97,7 +96,7 @@ export class HyprlandWindow {
       | { monitor: number | HyprlandMonitor; follow?: boolean }
       | { workspace: number | HyprlandWorkspace; follow?: boolean },
   ) {
-    return this.dsp('move', changeHyprlandObjectsToIds(data))
+    return this.dsp('move', data)
   }
 
   /** Pins the window. */

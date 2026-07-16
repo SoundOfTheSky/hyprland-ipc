@@ -90,9 +90,11 @@ export class HyprlandIPC<
 
   /** Parses incoming event chunks and dispatches them to subscribers. */
   private processChunk(chunk: string | Buffer) {
+    console.log('chunk', chunk.toString())
     for (const data of chunk.toString().split('\n')) {
       const [event, argumentsData] = data.split('>>')
-      if (!argumentsData) continue
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      if (argumentsData === undefined) continue
       const args = argumentsData.split(',')
       const subscribers = this.subscribers.get(event)
       if (!subscribers) continue

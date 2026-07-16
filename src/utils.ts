@@ -5,6 +5,10 @@ import { HyprlandWorkspace } from './workspace'
 /** Converts a JavaScript value into a Lua-compatible string*/
 export function toLua(value: unknown): string {
   if (value === null || value === undefined) return 'nil'
+  if (value instanceof HyprlandMonitor) return String(value.data.id)
+  else if (value instanceof HyprlandWorkspace) return String(value.data.id)
+  else if (value instanceof HyprlandWindow)
+    return JSON.stringify(`address:${value.data.address}`)
   switch (typeof value) {
     case 'boolean':
       return value ? 'true' : 'false'
@@ -26,16 +30,4 @@ export function toLua(value: unknown): string {
     default:
       throw new Error(`Cannot serialize ${typeof value} to Lua`)
   }
-}
-
-/** Replaces Hyprland object instances in a payload with their underlying IDs. */
-export function changeHyprlandObjectsToIds(data: Record<string, unknown>) {
-  for (const key in data) {
-    if (data[key] instanceof HyprlandMonitor) data[key] = data[key].data.id
-    else if (data[key] instanceof HyprlandWorkspace)
-      data[key] = data[key].data.id
-    else if (data[key] instanceof HyprlandWindow)
-      data[key] = `address:${data[key].data.address}`
-  }
-  return data
 }

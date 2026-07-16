@@ -17,7 +17,7 @@ for (const fileName of readdirSync(JS_SOCKET_DIR)) {
   const filePath = join(JS_SOCKET_DIR, fileName)
   const socket = createConnection(filePath)
   socket.on('connect', () => {
-    console.log('sending to', filePath, data)
+    console.log('Sending to', filePath, event, data)
     socket.end(`${event}>>${data.join(',')}`)
   })
   socket.on('error', () => {

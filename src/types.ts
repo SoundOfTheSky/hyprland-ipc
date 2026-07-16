@@ -3,11 +3,14 @@ import { HyprlandWorkspace } from './workspace'
 
 /** A color gradient used by Hyprland decorations such as borders and shadows. */
 export type Gradient = string | { colors?: string[]; angle?: number }
+
 /** A 2D vector used for positions or sizes in Hyprland config values. */
 export type Vec2 = [number | string, number | string]
+
 /** Gap values used for window spacing and workspace spacing in Hyprland. */
 export type CSSGaps =
   number | { top?: number; left?: number; right?: number; bottom?: number }
+
 /** A font weight that Hyprland can understand for UI text rendering. */
 export type FontWeight =
   | number
@@ -23,11 +26,16 @@ export type FontWeight =
   | 'ultrabold'
   | 'heavy'
   | 'ultraheavy'
+
 /** The fullscreen state of a window in Hyprland. */
 export type FullscreenState = 0 | 1 | 2
+
 /** A layout mode used by Hyprland workspaces. */
 export type WorkspaceLayout =
   'dwindle' | 'scrolling' | 'floating' | 'master' | 'monocle'
+
+export type Direction = 'left' | 'right' | 'up' | 'down'
+
 /** A rule that applies to a workspace in Hyprland. */
 export type WorkspaceRule = {
   /** The workspace name, ID, or special workspace target for the rule. */
@@ -65,6 +73,7 @@ export type WorkspaceRule = {
   /** Extra layout options passed to Hyprland. */
   layout_opts?: any
 }
+
 /** A rule that changes the appearance or behavior of a layer surface. */
 export type LayerRule = {
   /** The layer namespace match used to target a layer surface. */
@@ -1100,7 +1109,6 @@ export type HyprlandMonitorData = {
   hardwareCursorsInUse: number
 }
 
-export type Direction = 'left' | 'right' | 'up' | 'down'
 export type HyprlandWindowData = {
   address: string
   mapped: boolean

@@ -1,6 +1,9 @@
 {
   "extends": "@softsky/configs/tsconfig-emit.json",
   "compilerOptions": {
-    "types": ["@types/node"]
+    "types": ["@types/node", "@types/bun"],
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true,
   }
 }
