@@ -19,6 +19,7 @@ const REQUEST_SOCKET = join(SOCKET_DIR, '.socket.sock')
 const EVENT_SOCKET = join(SOCKET_DIR, '.socket2.sock')
 export const JS_SOCKET_DIR = join(SOCKET_DIR, 'js')
 
+/** IPC bridge for sending commands and receiving Hyprland events. */
 export class HyprlandIPC<
   EVENTS extends Record<string, string[]> = Record<never, never[]>,
 > {
@@ -26,6 +27,7 @@ export class HyprlandIPC<
   private jsEventServer: net.Server | undefined
   private subscribers = new Map<string, Set<AnyFunction>>()
 
+  /** Creates the IPC client and starts listening for Hyprland events. */
   public constructor() {
     mkdirSync(JS_SOCKET_DIR, {
       recursive: true,
@@ -33,28 +35,21 @@ export class HyprlandIPC<
     this.startListening()
   }
 
+  /** Registers a callback for a Hyprland event. Returns unsubscribe function. */
   public on<T extends keyof (EVENTS & HyprlandIPCEventsMap)>(
     event: T,
     callback: (...args: (EVENTS & HyprlandIPCEventsMap)[T]) => void,
-  ): void {
+  ) {
     let subscribers = this.subscribers.get(event as string)
     if (!subscribers) {
       subscribers = new Set()
       this.subscribers.set(event as string, subscribers)
     }
     subscribers.add(callback)
+    return () => subscribers.delete(callback)
   }
 
-  public off<T extends keyof (EVENTS & HyprlandIPCEventsMap)>(
-    event: T,
-    callback: (...args: (EVENTS & HyprlandIPCEventsMap)[T]) => void,
-  ): void {
-    const subscribers = this.subscribers.get(event as string)
-    if (!subscribers) return
-    subscribers.delete(callback)
-    if (subscribers.size === 0) this.subscribers.delete(event as string)
-  }
-
+  /** Sends a command to the Hyprland request socket and returns the response. */
   public send(cmd: string): Promise<string> {
     return new Promise((resolve, reject) => {
       const socket = net.createConnection(REQUEST_SOCKET)
@@ -73,6 +68,7 @@ export class HyprlandIPC<
     })
   }
 
+  /** Starts listening for Hyprland event and JS socket traffic. */
   protected startListening() {
     this.eventSocket?.destroy()
     this.jsEventServer?.close()
@@ -92,6 +88,7 @@ export class HyprlandIPC<
     })
   }
 
+  /** Parses incoming event chunks and dispatches them to subscribers. */
   private processChunk(chunk: string | Buffer) {
     for (const data of chunk.toString().split('\n')) {
       const [event, argumentsData] = data.split('>>')

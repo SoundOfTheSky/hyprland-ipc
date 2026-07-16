@@ -2,6 +2,7 @@ import { HyprlandMonitor } from './monitor'
 import { HyprlandWindow } from './window'
 import { HyprlandWorkspace } from './workspace'
 
+/** Converts a JavaScript value into a Lua-compatible string*/
 export function toLua(value: unknown): string {
   if (value === null || value === undefined) return 'nil'
   switch (typeof value) {
@@ -27,6 +28,7 @@ export function toLua(value: unknown): string {
   }
 }
 
+/** Replaces Hyprland object instances in a payload with their underlying IDs. */
 export function changeHyprlandObjectsToIds(data: Record<string, unknown>) {
   for (const key in data) {
     if (data[key] instanceof HyprlandMonitor) data[key] = data[key].data.id

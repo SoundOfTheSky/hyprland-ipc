@@ -1,3 +1,5 @@
+import { AnyFunction, UUID } from '@softsky/utils'
+
 import { HyprlandIPC } from './ipc'
 import { HyprlandMonitor } from './monitor'
 import {
@@ -14,6 +16,7 @@ import { changeHyprlandObjectsToIds, toLua } from './utils'
 import { HyprlandWindow } from './window'
 import { HyprlandWorkspace } from './workspace'
 
+/** Main client for interacting with a running Hyprland session. */
 export class Hyprland<
   EVENTS extends Record<string, string[]> = Record<never, never[]>,
 > {
@@ -26,15 +29,18 @@ export class Hyprland<
   public activeWindow: HyprlandWindow | undefined
 
   public constructor(
-    autoUpdateWindows = true,
+    options?: {
+      /** Update windows data automatically on events. CPU extensive */
+      autoUpdateWindows?: boolean
+    },
     public ipc = new HyprlandIPC<EVENTS>(),
   ) {
     // Events that cause windows update
     this.ipc.on('activewindowv2', (address) => {
       this.activeWindow = this.windowByAddress.get(address)
-      if (autoUpdateWindows) void this.updateWindows()
+      if (options?.autoUpdateWindows) void this.updateWindows()
     })
-    if (autoUpdateWindows) {
+    if (options?.autoUpdateWindows) {
       for (const event of [
         'openwindow',
         'movewindow',
@@ -59,16 +65,19 @@ export class Hyprland<
     }
   }
 
+  /** Evaluates raw Lua code through Hyprland's IPC interface. */
   public async eval(luaCode: string): Promise<string> {
     return this.ipc.send(`/eval ${luaCode}`)
   }
 
+  /** Run hyprland dispatcher from hl.dps */
   public dispatch(name: string, data: Record<string, any>): Promise<string> {
-    return this.eval(
-      `hl.dispatch(hl.dsp${name ? '.' + name : ''}(${toLua(changeHyprlandObjectsToIds(data))}))`,
+    return this.ipc.send(
+      `/dispatch hl.dsp${name ? '.' + name : ''}(${toLua(changeHyprlandObjectsToIds(data))}`,
     )
   }
 
+  /** Refreshes the cached window list */
   public async updateWindows(): Promise<HyprlandWindow[]> {
     const clients = JSON.parse(
       await this.ipc.send('j/clients'),
@@ -98,6 +107,7 @@ export class Hyprland<
     return this.windows
   }
 
+  /** Refreshes the cached workspace list */
   public async updateWorkspaces(): Promise<HyprlandWorkspace[]> {
     const workspaceData = JSON.parse(
       await this.ipc.send('j/workspaces'),
@@ -123,6 +133,7 @@ export class Hyprland<
     return this.workspaces
   }
 
+  /** Refreshes the cached monitor list */
   public async updateMonitors(): Promise<HyprlandMonitor[]> {
     const monitorData = JSON.parse(
       await this.ipc.send('j/monitors'),
@@ -148,6 +159,7 @@ export class Hyprland<
     return this.monitors
   }
 
+  /** Refreshes windows, workspaces, and monitors together. */
   public async updateAll() {
     await Promise.all([
       this.updateWindows(),
@@ -156,19 +168,32 @@ export class Hyprland<
     ])
   }
 
+  /** Applies a window rule through Hyprland. */
   public windowRule(rule: WindowRule) {
     return this.eval(`hl.window_rule(${toLua(rule)})`)
   }
 
+  /** Applies a layer rule through Hyprland. */
   public layerRule(rule: LayerRule) {
     return this.eval(`hl.layer_rule(${toLua(rule)})`)
   }
 
+  /** Applies a workspace rule through Hyprland. */
   public workspaceRule(rule: WorkspaceRule) {
     return this.eval(`hl.workspace_rule(${toLua(rule)})`)
   }
 
+  /** Applies a Hyprland configuration block. */
   public config(config: HyprlandConfig) {
     return this.eval(`hl.config(${toLua(config)})`)
+  }
+
+  /** Register keybind. Returns unsubscribe function. */
+  public async bind(bind: string[], callback: AnyFunction) {
+    const id = UUID()
+    await this.eval(
+      `hl.bind("${bind.join(' + ')}", hl.dsp.exec_cmd("hyprland-ipc-js ${id}"))`,
+    )
+    return this.ipc.on(id, callback)
   }
 }

@@ -1,3 +1,4 @@
+/** Re-exports the public Hyprland API surface. */
 export * from './hyprland'
 export * from './types'
 export * from './ipc'
