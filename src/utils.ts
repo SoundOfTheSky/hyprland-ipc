@@ -17,6 +17,7 @@ export function toLua(value: unknown): string {
       return JSON.stringify(value)
     case 'object':
       if (value instanceof Date) return JSON.stringify(value.toISOString())
+      if (value instanceof RegExp) return JSON.stringify(value.toString())
       if (Array.isArray(value)) return `{ ${value.map(toLua).join(', ')} }`
       return `{ ${Object.entries(value)
         .map(([key, value]) => `[${JSON.stringify(key)}] = ${toLua(value)}`)

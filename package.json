@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/SoundOfTheSky/hyprland-ipc.git"
   },
+  "bin": {
+    "hyprland-ipc": "./dist/cli.js"
+  },
   "author": "SoundOfTheSky",
   "license": "MIT",
   "bugs": {

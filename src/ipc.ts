@@ -1,10 +1,11 @@
+import { mkdirSync, rmSync } from 'node:fs'
 import net from 'node:net'
 import { join } from 'node:path'
 import { env } from 'node:process'
 
 import { AnyFunction } from '@softsky/utils'
 
-import { HyprlandIPCEventsMap } from './events'
+import { HyprlandIPCEventsMap } from './types'
 
 if (!env.XDG_RUNTIME_DIR) throw new Error('XDG_RUNTIME_DIR is not set')
 if (!env.HYPRLAND_INSTANCE_SIGNATURE)
@@ -16,73 +17,42 @@ const SOCKET_DIR = join(
 )
 const REQUEST_SOCKET = join(SOCKET_DIR, '.socket.sock')
 const EVENT_SOCKET = join(SOCKET_DIR, '.socket2.sock')
+export const JS_SOCKET_DIR = join(SOCKET_DIR, 'js')
 
-export class HyprlandIPC {
+export class HyprlandIPC<
+  EVENTS extends Record<string, string[]> = Record<never, never[]>,
+> {
   private eventSocket: net.Socket | undefined
+  private jsEventServer: net.Server | undefined
   private subscribers = new Map<string, Set<AnyFunction>>()
 
-  public startListening(tryNumber = 1): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.stopListening()
-      this.eventSocket = net.createConnection(EVENT_SOCKET)
-      this.eventSocket.on('connect', () => {
-        resolve()
-      })
-      this.eventSocket.on('error', () => {
-        reject(new Error('Failed to connect to event socket'))
-        this.eventSocket = undefined
-      })
-      this.eventSocket.on('end', () => {
-        if (this.subscribers.size > 0 && tryNumber < 5)
-          setTimeout(() => void this.startListening(tryNumber + 1), 1000)
-        else this.eventSocket = undefined
-      })
-      this.eventSocket.on('data', (chunk) => {
-        for (const data of chunk.toString().split('\n')) {
-          const [event, argumentsData] = data.split('>>')
-          if (!argumentsData) continue
-          const args = argumentsData.split(',')
-          const subscribers = this.subscribers.get(event)
-          if (!subscribers) continue
-          for (const subscriber of subscribers) {
-            try {
-              subscriber(...args)
-            } catch (error) {
-              console.error(`Error in subscriber for event "${event}":`, error)
-            }
-          }
-        }
-      })
+  public constructor() {
+    mkdirSync(JS_SOCKET_DIR, {
+      recursive: true,
     })
+    this.startListening()
   }
 
-  public stopListening(): void {
-    this.eventSocket?.destroy()
-    this.eventSocket = undefined
-  }
-
-  public on<T extends keyof HyprlandIPCEventsMap>(
+  public on<T extends keyof (EVENTS & HyprlandIPCEventsMap)>(
     event: T,
-    callback: (...args: HyprlandIPCEventsMap[T]) => void,
+    callback: (...args: (EVENTS & HyprlandIPCEventsMap)[T]) => void,
   ): void {
-    if (!this.eventSocket) void this.startListening()
-    let subscribers = this.subscribers.get(event)
+    let subscribers = this.subscribers.get(event as string)
     if (!subscribers) {
       subscribers = new Set()
-      this.subscribers.set(event, subscribers)
+      this.subscribers.set(event as string, subscribers)
     }
     subscribers.add(callback)
   }
 
-  public off<T extends keyof HyprlandIPCEventsMap>(
+  public off<T extends keyof (EVENTS & HyprlandIPCEventsMap)>(
     event: T,
-    callback: (...args: HyprlandIPCEventsMap[T]) => void,
+    callback: (...args: (EVENTS & HyprlandIPCEventsMap)[T]) => void,
   ): void {
-    const subscribers = this.subscribers.get(event)
+    const subscribers = this.subscribers.get(event as string)
     if (!subscribers) return
     subscribers.delete(callback)
-    if (subscribers.size === 0) this.subscribers.delete(event)
-    if (this.subscribers.size === 0) this.stopListening()
+    if (subscribers.size === 0) this.subscribers.delete(event as string)
   }
 
   public send(cmd: string): Promise<string> {
@@ -101,5 +71,41 @@ export class HyprlandIPC {
       })
       socket.on('error', reject)
     })
+  }
+
+  protected startListening() {
+    this.eventSocket?.destroy()
+    this.jsEventServer?.close()
+    this.eventSocket = net.createConnection(EVENT_SOCKET)
+    this.eventSocket.on('error', () => this.eventSocket?.destroy())
+    this.eventSocket.on('end', () =>
+      setTimeout(this.startListening.bind(this), 5000),
+    )
+    this.eventSocket.on('data', this.processChunk.bind(this))
+    this.jsEventServer = net.createServer((socket) => {
+      socket.on('data', this.processChunk.bind(this))
+    })
+    const address = join(JS_SOCKET_DIR, Date.now() + '.sock')
+    this.jsEventServer.listen(address)
+    this.jsEventServer.once('close', () => {
+      rmSync(address)
+    })
+  }
+
+  private processChunk(chunk: string | Buffer) {
+    for (const data of chunk.toString().split('\n')) {
+      const [event, argumentsData] = data.split('>>')
+      if (!argumentsData) continue
+      const args = argumentsData.split(',')
+      const subscribers = this.subscribers.get(event)
+      if (!subscribers) continue
+      for (const subscriber of subscribers) {
+        try {
+          subscriber(...args)
+        } catch (error) {
+          console.error(`Error in subscriber for event "${event}":`, error)
+        }
+      }
+    }
   }
 }

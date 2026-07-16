@@ -1,10 +1,22 @@
 import { HyprlandIPC } from './ipc'
-import { HyprlandMonitor, HyprlandMonitorData } from './monitor'
+import { HyprlandMonitor } from './monitor'
+import {
+  HyprlandIPCEventsMap,
+  HyprlandConfig,
+  LayerRule,
+  WindowRule,
+  WorkspaceRule,
+  HyprlandMonitorData,
+  HyprlandWorkspaceData,
+  HyprlandWindowData,
+} from './types'
 import { changeHyprlandObjectsToIds, toLua } from './utils'
-import { HyprlandWindow, HyprlandWindowData } from './window'
-import { HyprlandWorkspace, HyprlandWorkspaceData } from './workspace'
+import { HyprlandWindow } from './window'
+import { HyprlandWorkspace } from './workspace'
 
-export class Hyprland {
+export class Hyprland<
+  EVENTS extends Record<string, string[]> = Record<never, never[]>,
+> {
   public windows: HyprlandWindow[] = []
   public windowByAddress = new Map<string, HyprlandWindow>()
   public workspaces: HyprlandWorkspace[] = []
@@ -13,10 +25,38 @@ export class Hyprland {
   public monitorById = new Map<number, HyprlandMonitor>()
   public activeWindow: HyprlandWindow | undefined
 
-  public constructor(public ipc = new HyprlandIPC()) {
+  public constructor(
+    autoUpdateWindows = true,
+    public ipc = new HyprlandIPC<EVENTS>(),
+  ) {
+    // Events that cause windows update
     this.ipc.on('activewindowv2', (address) => {
       this.activeWindow = this.windowByAddress.get(address)
+      if (autoUpdateWindows) void this.updateWindows()
     })
+    if (autoUpdateWindows) {
+      for (const event of [
+        'openwindow',
+        'movewindow',
+        'windowtitle',
+        'fullscreen',
+        'pin',
+        'bell',
+        'moveintogroup',
+        'moveoutofgroup',
+        'togglegroup',
+        'urgent',
+        'changefloatingmode',
+      ] as (keyof HyprlandIPCEventsMap)[])
+        this.ipc.on(event, () => void this.updateWindows())
+      this.ipc.on('closewindow', (address) => {
+        this.windowByAddress.delete(address)
+        this.windows.splice(
+          this.windows.findIndex((x) => x.data.address === address),
+          1,
+        )
+      })
+    }
   }
 
   public async eval(luaCode: string): Promise<string> {
@@ -51,6 +91,10 @@ export class Hyprland {
         1,
       )
     }
+    const activeWindow = JSON.parse(
+      await this.ipc.send('j/activewindow'),
+    ) as HyprlandWindowData
+    this.activeWindow = this.windowByAddress.get(activeWindow.address)
     return this.windows
   }
 
@@ -104,15 +148,27 @@ export class Hyprland {
     return this.monitors
   }
 
-  public async update() {
+  public async updateAll() {
     await Promise.all([
       this.updateWindows(),
       this.updateWorkspaces(),
       this.updateMonitors(),
     ])
-    const activeWindow = JSON.parse(
-      await this.ipc.send('j/activewindow'),
-    ) as HyprlandWindowData
-    this.activeWindow = this.windowByAddress.get(activeWindow.address)
+  }
+
+  public windowRule(rule: WindowRule) {
+    return this.eval(`hl.window_rule(${toLua(rule)})`)
+  }
+
+  public layerRule(rule: LayerRule) {
+    return this.eval(`hl.layer_rule(${toLua(rule)})`)
+  }
+
+  public workspaceRule(rule: WorkspaceRule) {
+    return this.eval(`hl.workspace_rule(${toLua(rule)})`)
+  }
+
+  public config(config: HyprlandConfig) {
+    return this.eval(`hl.config(${toLua(config)})`)
   }
 }

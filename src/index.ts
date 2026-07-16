@@ -1,5 +1,5 @@
 export * from './hyprland'
-export * from './events'
+export * from './types'
 export * from './ipc'
 export * from './monitor'
 export * from './utils'

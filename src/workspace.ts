@@ -1,19 +1,7 @@
 import { Hyprland } from './hyprland'
+import { HyprlandWorkspaceData } from './types'
 import { HyprlandWindow } from './window'
 
-export type HyprlandWorkspaceLayouts = 'dwindle' | 'scrolling' | 'floating'
-export type HyprlandWorkspaceData = {
-  id: number
-  name: string
-  monitor: string
-  monitorID: number
-  windows: number
-  hasfullscreen: boolean
-  lastwindow: string
-  lastwindowtitle: string
-  ispersistent: boolean
-  tiledLayout: HyprlandWorkspaceLayouts
-}
 export class HyprlandWorkspace {
   public constructor(
     private hyprland: Hyprland,

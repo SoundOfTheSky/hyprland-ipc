@@ -1,43 +1,10 @@
+import { Direction } from 'node:readline'
+
 import { Hyprland } from './hyprland'
 import { HyprlandMonitor } from './monitor'
+import { HyprlandWindowData } from './types'
 import { changeHyprlandObjectsToIds } from './utils'
 import { HyprlandWorkspace } from './workspace'
-
-export type Direction = 'left' | 'right' | 'up' | 'down'
-export type HyprlandWindowData = {
-  address: string
-  mapped: boolean
-  hidden: boolean
-  visible: boolean
-  acceptsInput: boolean
-  at: [number, number]
-  size: [number, number]
-  workspace: {
-    id: number
-    name: string
-  }
-  floating: boolean
-  monitor: number
-  class: string
-  title: string
-  initialClass: string
-  initialTitle: string
-  pid: number
-  xwayland: boolean
-  pinned: boolean
-  fullscreen: number
-  fullscreenClient: number
-  overFullscreen: boolean
-  grouped: []
-  tags: []
-  swallowing: string
-  focusHistoryID: number
-  inhibitingIdle: boolean
-  xdgTag: string
-  xdgDescription: string
-  contentType: string
-  stableId: string
-}
 
 export class HyprlandWindow {
   public constructor(
