@@ -2,7 +2,17 @@ import { HyprlandMonitor } from './monitor'
 import { HyprlandWindow } from './window'
 import { HyprlandWorkspace } from './workspace'
 
-/** Converts a JavaScript value into a Lua-compatible string*/
+/**
+ * Converts a JavaScript value into a Lua-compatible string.
+ *
+ * @param value Value to serialize for Hyprland.
+ * @returns A string representation that Hyprland can consume.
+ * @example
+ * ```ts
+ * toLua({ foo: 'bar' })
+ * // => '{ ["foo"] = "bar" }'
+ * ```
+ */
 export function toLua(value: unknown): string {
   if (value === null || value === undefined) return 'nil'
   if (value instanceof HyprlandMonitor) return String(value.data.id)

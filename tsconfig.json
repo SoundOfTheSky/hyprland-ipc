@@ -3,6 +3,7 @@
   "compilerOptions": {
     "types": ["@types/node", "@types/bun"],
   },
+  
   "tsc-alias": {
     "resolveFullPaths": true,
   }
