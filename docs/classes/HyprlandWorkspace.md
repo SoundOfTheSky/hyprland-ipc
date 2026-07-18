@@ -6,7 +6,7 @@
 
 # Class: HyprlandWorkspace
 
-Defined in: [workspace.ts:6](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/workspace.ts#L6)
+Defined in: [workspace.ts:6](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/workspace.ts#L6)
 
 Wrapper around a Hyprland workspace object.
 
@@ -16,7 +16,7 @@ Wrapper around a Hyprland workspace object.
 
 > **new HyprlandWorkspace**(`hyprland`, `data`): `HyprlandWorkspace`
 
-Defined in: [workspace.ts:17](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/workspace.ts#L17)
+Defined in: [workspace.ts:17](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/workspace.ts#L17)
 
 Creates a workspace wrapper around Hyprland workspace data.
 
@@ -50,7 +50,7 @@ const workspace = new HyprlandWorkspace(client, { id: 1 } as any)
 
 > **data**: `HyprlandWorkspaceData`
 
-Defined in: [workspace.ts:19](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/workspace.ts#L19)
+Defined in: [workspace.ts:19](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/workspace.ts#L19)
 
 Raw workspace data returned by Hyprland.
 
@@ -62,7 +62,7 @@ Raw workspace data returned by Hyprland.
 
 > **get** **windows**(): [`HyprlandWindow`](HyprlandWindow.md)[]
 
-Defined in: [workspace.ts:45](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/workspace.ts#L45)
+Defined in: [workspace.ts:45](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/workspace.ts#L45)
 
 Returns the windows that belong to this workspace.
 
@@ -84,7 +84,7 @@ The windows currently assigned to the workspace.
 
 > **focus**(): `Promise`\<`string`\>
 
-Defined in: [workspace.ts:32](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/workspace.ts#L32)
+Defined in: [workspace.ts:32](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/workspace.ts#L32)
 
 Focuses the workspace.
 

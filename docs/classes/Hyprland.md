@@ -6,7 +6,7 @@
 
 # Class: Hyprland\<EVENTS\>
 
-Defined in: [hyprland.ts:21](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L21)
+Defined in: [hyprland.ts:21](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L21)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [hyprland.ts:21](https://github.com/SoundOfTheSky/hyprland-ipc/blob/
 
 > **new Hyprland**\<`EVENTS`\>(`options?`): `Hyprland`\<`EVENTS`\>
 
-Defined in: [hyprland.ts:39](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L39)
+Defined in: [hyprland.ts:39](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L39)
 
 Creates a Hyprland client and optionally enables live cache updates.
 
@@ -52,7 +52,7 @@ const client = new Hyprland({ autoUpdate: true })
 
 > `protected` **ipc**: `HyprlandIPC`\<`EVENTS`\>
 
-Defined in: [hyprland.ts:28](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L28)
+Defined in: [hyprland.ts:28](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L28)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [hyprland.ts:28](https://github.com/SoundOfTheSky/hyprland-ipc/blob/
 
 > **monitors**: `Store`\<`HyprlandMonitorData`, [`HyprlandMonitor`](HyprlandMonitor.md), `"id"`\>
 
-Defined in: [hyprland.ts:26](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L26)
+Defined in: [hyprland.ts:26](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L26)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [hyprland.ts:26](https://github.com/SoundOfTheSky/hyprland-ipc/blob/
 
 > **windows**: `Store`\<`HyprlandWindowData`, [`HyprlandWindow`](HyprlandWindow.md), `"address"`\>
 
-Defined in: [hyprland.ts:24](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L24)
+Defined in: [hyprland.ts:24](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L24)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [hyprland.ts:24](https://github.com/SoundOfTheSky/hyprland-ipc/blob/
 
 > **workspaces**: `Store`\<`HyprlandWorkspaceData`, [`HyprlandWorkspace`](HyprlandWorkspace.md), `"id"`\>
 
-Defined in: [hyprland.ts:25](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L25)
+Defined in: [hyprland.ts:25](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L25)
 
 ## Methods
 
@@ -84,7 +84,7 @@ Defined in: [hyprland.ts:25](https://github.com/SoundOfTheSky/hyprland-ipc/blob/
 
 > **bind**(`bind`, `callback`): `Promise`\<() => `boolean`\>
 
-Defined in: [hyprland.ts:289](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L289)
+Defined in: [hyprland.ts:289](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L289)
 
 Registers a keybind that dispatches a callback through the IPC bridge.
 
@@ -121,7 +121,7 @@ stop()
 
 > **config**(`config`): `Promise`\<`string`\>
 
-Defined in: [hyprland.ts:273](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L273)
+Defined in: [hyprland.ts:273](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L273)
 
 Applies a Hyprland configuration block.
 
@@ -151,7 +151,7 @@ await client.config({ general: { border_size: 2 } })
 
 > **dispatch**(`name`, `data`): `Promise`\<`string`\>
 
-Defined in: [hyprland.ts:132](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L132)
+Defined in: [hyprland.ts:132](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L132)
 
 Dispatches a Hyprland dispatcher action.
 
@@ -187,7 +187,7 @@ await client.dispatch('focus', { window: this.windows.find('class:^steam$') })
 
 > **eval**(`luaCode`): `Promise`\<`string`\>
 
-Defined in: [hyprland.ts:117](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L117)
+Defined in: [hyprland.ts:117](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L117)
 
 Evaluates raw Lua code through Hyprland's IPC interface.
 
@@ -218,7 +218,7 @@ console.log(result)
 
 > **focus**(`data`): `Promise`\<`string`\>
 
-Defined in: [hyprland.ts:307](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L307)
+Defined in: [hyprland.ts:307](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L307)
 
 Moves focus in the Hyprland session.
 
@@ -248,7 +248,7 @@ await client.focus({ direction: 'left' })
 
 > **layerRule**(`rule`): `Promise`\<`string`\>
 
-Defined in: [hyprland.ts:245](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L245)
+Defined in: [hyprland.ts:245](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L245)
 
 Applies a layer rule through Hyprland.
 
@@ -278,7 +278,7 @@ await client.layerRule({ match: { namespace: 'bar' }, blur: true })
 
 > **on**\<`T`\>(`event`, `callback`): () => `boolean`
 
-Defined in: [hyprland.ts:150](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L150)
+Defined in: [hyprland.ts:150](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L150)
 
 Registers a callback for a Hyprland event.
 
@@ -323,7 +323,7 @@ unsubscribe()
 
 > **updateAll**(): `Promise`\<`void`\>
 
-Defined in: [hyprland.ts:213](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L213)
+Defined in: [hyprland.ts:213](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L213)
 
 Refreshes windows, workspaces, and monitors together.
 
@@ -345,7 +345,7 @@ await client.updateAll()
 
 > **updateMonitors**(): `Promise`\<`void`\>
 
-Defined in: [hyprland.ts:198](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L198)
+Defined in: [hyprland.ts:198](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L198)
 
 Refreshes the cached monitor list from Hyprland.
 
@@ -367,7 +367,7 @@ await client.updateMonitors()
 
 > **updateWindows**(): `Promise`\<`void`\>
 
-Defined in: [hyprland.ts:166](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L166)
+Defined in: [hyprland.ts:166](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L166)
 
 Refreshes the cached window list from Hyprland.
 
@@ -389,7 +389,7 @@ await client.updateWindows()
 
 > **updateWorkspaces**(): `Promise`\<`void`\>
 
-Defined in: [hyprland.ts:181](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L181)
+Defined in: [hyprland.ts:181](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L181)
 
 Refreshes the cached workspace list from Hyprland.
 
@@ -411,7 +411,7 @@ await client.updateWorkspaces()
 
 > **windowRule**(`rule`): `Promise`\<`string`\>
 
-Defined in: [hyprland.ts:231](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L231)
+Defined in: [hyprland.ts:231](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L231)
 
 Applies a window rule through Hyprland.
 
@@ -441,7 +441,7 @@ await client.windowRule({ match: { class: 'kitty' }, float: true })
 
 > **workspaceRule**(`rule`): `Promise`\<`string`\>
 
-Defined in: [hyprland.ts:259](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/hyprland.ts#L259)
+Defined in: [hyprland.ts:259](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/hyprland.ts#L259)
 
 Applies a workspace rule through Hyprland.
 

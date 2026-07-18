@@ -1,7 +1,7 @@
 {
   "name": "hyprland-ipc",
-  "version": "1.0.4",
-  "description": "Control Hyprland with JS",
+  "version": "1.0.5",
+  "description": "Control Hyprland with JS instead of LUA.",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf ./dist && eslint \"./src/**/*.ts\" --fix && tsc && tsc-alias && typedoc",

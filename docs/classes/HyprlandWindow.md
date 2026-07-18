@@ -6,7 +6,7 @@
 
 # Class: HyprlandWindow
 
-Defined in: [window.ts:9](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L9)
+Defined in: [window.ts:9](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L9)
 
 Wrapper around a Hyprland window object.
 
@@ -16,7 +16,7 @@ Wrapper around a Hyprland window object.
 
 > **new HyprlandWindow**(`hyprland`, `data`): `HyprlandWindow`
 
-Defined in: [window.ts:20](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L20)
+Defined in: [window.ts:20](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L20)
 
 Creates a window wrapper around Hyprland window data.
 
@@ -50,7 +50,7 @@ const window = new HyprlandWindow(client, { address: '0x1', workspace: { id: 1 }
 
 > **data**: `HyprlandWindowData`
 
-Defined in: [window.ts:22](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L22)
+Defined in: [window.ts:22](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L22)
 
 Raw window data returned by Hyprland.
 
@@ -62,7 +62,7 @@ Raw window data returned by Hyprland.
 
 > **get** **monitor**(): [`HyprlandMonitor`](HyprlandMonitor.md) \| `undefined`
 
-Defined in: [window.ts:47](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L47)
+Defined in: [window.ts:47](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L47)
 
 Returns the monitor that currently hosts this window.
 
@@ -86,7 +86,7 @@ The monitor hosting the window, if known.
 
 > **get** **workspace**(): [`HyprlandWorkspace`](HyprlandWorkspace.md) \| `undefined`
 
-Defined in: [window.ts:34](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L34)
+Defined in: [window.ts:34](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L34)
 
 Returns the workspace that currently owns this window.
 
@@ -108,7 +108,7 @@ The workspace containing the window, if known.
 
 > **alter\_zorder**(`mode`): `Promise`\<`string`\>
 
-Defined in: [window.ts:76](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L76)
+Defined in: [window.ts:76](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L76)
 
 Changes the window's z-order.
 
@@ -138,7 +138,7 @@ await window.alter_zorder('top')
 
 > **bring\_to\_top**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:90](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L90)
+Defined in: [window.ts:90](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L90)
 
 Brings the window to the top of the stack.
 
@@ -160,7 +160,7 @@ await window.bring_to_top()
 
 > **center**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:104](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L104)
+Defined in: [window.ts:104](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L104)
 
 Centers the window.
 
@@ -182,7 +182,7 @@ await window.center()
 
 > **clear\_tags**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:118](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L118)
+Defined in: [window.ts:118](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L118)
 
 Clears all tags from the window.
 
@@ -204,7 +204,7 @@ await window.clear_tags()
 
 > **close**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:132](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L132)
+Defined in: [window.ts:132](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L132)
 
 Closes the window.
 
@@ -226,7 +226,7 @@ await window.close()
 
 > **cycle\_next**(`data?`): `Promise`\<`string`\>
 
-Defined in: [window.ts:146](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L146)
+Defined in: [window.ts:146](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L146)
 
 Cycles through windows in the given direction or mode.
 
@@ -266,7 +266,7 @@ await window.cycle_next({ next: true })
 
 > **deny\_from\_group**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:164](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L164)
+Defined in: [window.ts:164](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L164)
 
 Removes the window from its current group.
 
@@ -288,7 +288,7 @@ await window.deny_from_group()
 
 > **drag**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:178](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L178)
+Defined in: [window.ts:178](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L178)
 
 Starts dragging the window.
 
@@ -310,7 +310,7 @@ await window.drag()
 
 > `protected` **dsp**(`name`, `data?`): `Promise`\<`string`\>
 
-Defined in: [window.ts:363](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L363)
+Defined in: [window.ts:363](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L363)
 
 Dispatches a window-specific Hyprland action.
 
@@ -346,7 +346,7 @@ await window.dsp('focus')
 
 > **float**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:192](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L192)
+Defined in: [window.ts:192](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L192)
 
 Floats the window.
 
@@ -368,7 +368,7 @@ await window.float()
 
 > **focus**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:62](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L62)
+Defined in: [window.ts:62](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L62)
 
 Focuses the window.
 
@@ -390,7 +390,7 @@ await window.focus()
 
 > **fullscreen**(`mode`): `Promise`\<`string`\>
 
-Defined in: [window.ts:206](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L206)
+Defined in: [window.ts:206](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L206)
 
 Toggles fullscreen state for the window.
 
@@ -420,7 +420,7 @@ await window.fullscreen(1)
 
 > **kill**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:220](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L220)
+Defined in: [window.ts:220](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L220)
 
 Kills the window process.
 
@@ -442,7 +442,7 @@ await window.kill()
 
 > **move**(`data`): `Promise`\<`string`\>
 
-Defined in: [window.ts:234](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L234)
+Defined in: [window.ts:234](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L234)
 
 Moves the window to a new position, workspace, or monitor.
 
@@ -472,7 +472,7 @@ await window.move({ direction: 'left' })
 
 > **pin**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:254](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L254)
+Defined in: [window.ts:254](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L254)
 
 Pins the window.
 
@@ -494,7 +494,7 @@ await window.pin()
 
 > **pseudo**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:268](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L268)
+Defined in: [window.ts:268](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L268)
 
 Enables pseudo-tiling for the window.
 
@@ -516,7 +516,7 @@ await window.pseudo()
 
 > **resize**(`data?`): `Promise`\<`string`\>
 
-Defined in: [window.ts:282](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L282)
+Defined in: [window.ts:282](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L282)
 
 Resizes the window.
 
@@ -546,7 +546,7 @@ await window.resize({ x: 20, y: 20, relative: true })
 
 > **signal**(`signal`): `Promise`\<`string`\>
 
-Defined in: [window.ts:300](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L300)
+Defined in: [window.ts:300](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L300)
 
 Sends a signal to the window.
 
@@ -576,7 +576,7 @@ await window.signal('SIGTERM')
 
 > **swap**(`data`): `Promise`\<`string`\>
 
-Defined in: [window.ts:314](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L314)
+Defined in: [window.ts:314](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L314)
 
 Swaps the window with another window or relative position.
 
@@ -606,7 +606,7 @@ await window.swap({ next: true })
 
 > **tag**(`tag`): `Promise`\<`string`\>
 
-Defined in: [window.ts:334](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L334)
+Defined in: [window.ts:334](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L334)
 
 Applies a tag to the window.
 
@@ -636,7 +636,7 @@ await window.tag('work')
 
 > **toggle\_swallow**(): `Promise`\<`string`\>
 
-Defined in: [window.ts:348](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/window.ts#L348)
+Defined in: [window.ts:348](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/window.ts#L348)
 
 Toggles swallow behavior for the window.
 

@@ -6,7 +6,7 @@
 
 # Class: HyprlandMonitor
 
-Defined in: [monitor.ts:4](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/monitor.ts#L4)
+Defined in: [monitor.ts:4](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/monitor.ts#L4)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [monitor.ts:4](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bc
 
 > **new HyprlandMonitor**(`hyprland`, `data`): `HyprlandMonitor`
 
-Defined in: [monitor.ts:15](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/monitor.ts#L15)
+Defined in: [monitor.ts:15](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/monitor.ts#L15)
 
 Creates a monitor wrapper around Hyprland monitor data.
 
@@ -48,7 +48,7 @@ const monitor = new HyprlandMonitor(client, { id: 1 } as any)
 
 > **data**: `HyprlandMonitorData`
 
-Defined in: [monitor.ts:17](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/monitor.ts#L17)
+Defined in: [monitor.ts:17](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/monitor.ts#L17)
 
 Raw monitor data returned by Hyprland.
 
@@ -60,7 +60,7 @@ Raw monitor data returned by Hyprland.
 
 > **get** **windows**(): [`HyprlandWindow`](HyprlandWindow.md)[]
 
-Defined in: [monitor.ts:29](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/monitor.ts#L29)
+Defined in: [monitor.ts:29](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/monitor.ts#L29)
 
 Returns the windows currently attached to this monitor.
 

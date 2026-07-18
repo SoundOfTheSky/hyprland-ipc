@@ -8,7 +8,7 @@
 
 > **toLua**(`value`): `string`
 
-Defined in: [utils.ts:16](https://github.com/SoundOfTheSky/hyprland-ipc/blob/bca2f06ee0fcf3a65dd43ab8e96ca764a5cb1a8c/src/utils.ts#L16)
+Defined in: [utils.ts:16](https://github.com/SoundOfTheSky/hyprland-ipc/blob/f278b901355e37b749fb5ee64c78fc35448e0a78/src/utils.ts#L16)
 
 Converts a JavaScript value into a Lua-compatible string.
 
